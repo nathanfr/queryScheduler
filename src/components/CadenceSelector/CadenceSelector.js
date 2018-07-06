@@ -12,24 +12,17 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    color: 'white'
   },
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120,
     marginLeft: 'auto',
     marginRight: 'auto',
-    color: 'white'
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
-    color: 'white'
   }
 });
-
-const inlineStyle = {
-  color: 'white',
-};
 
 class CadenceSelector extends React.Component {
   state = {
@@ -47,10 +40,9 @@ class CadenceSelector extends React.Component {
     return (
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-native-helper" className='inputItem' style={inlineStyle}>Cadence</InputLabel>
+          <InputLabel htmlFor="age-native-helper" className='inputItem'>Cadence</InputLabel>
           <NativeSelect
             value={this.state.age}
-            style={inlineStyle}
             onChange={this.handleChange('age')}
             input={<Input name="Cadence" id="age-native-helper" />}
           >
@@ -60,7 +52,7 @@ class CadenceSelector extends React.Component {
             <option value={30}>Daily</option>
             <option value={30}>Hourly</option>
           </NativeSelect>
-          <FormHelperText style={inlineStyle}>Select the frequence with which you would like to run your query.</FormHelperText>
+          <FormHelperText>Select the frequence with which you would like to run your query.</FormHelperText>
         </FormControl>
       </div>
     );
