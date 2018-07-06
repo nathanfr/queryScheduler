@@ -1,0 +1,11 @@
+.centeredTextArea {
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 1em;
+}
+
+.centeredTextArea textarea {
+	background-color: white;
+	opacity: 0.3;
+	border: none;
+}

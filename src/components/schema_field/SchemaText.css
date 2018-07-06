@@ -1,0 +1,16 @@
+span + span {
+    margin-left: 10px;
+}
+
+#schema {
+	color: white;
+	border: white;
+}
+
+#table {
+	color: white;
+}
+
+TextField {
+	color: white;
+}
