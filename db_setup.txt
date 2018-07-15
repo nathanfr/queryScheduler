@@ -1,0 +1,37 @@
+createdb 'scheduler'
+
+psql 'scheduler'
+
+CREATE TABLE users (
+	id serial NOT NULL PRIMARY KEY,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	joined TIMESTAMP
+);
+
+CREATE TABLE login (
+	id serial NOT NULL PRIMARY KEY,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	password VARCHAR(100)
+);
+
+CREATE TABLE connections (
+	connection_id serial NOT NULL PRIMARY KEY,
+	connection_name VARCHAR(100) NOT NULL,
+	warehouse VARCHAR(100) NOT NULL,
+	url VARCHAR(100),
+	port SMALLINT,
+	db VARCHAR(100),
+	username VARCHAR(100),
+	password VARCHAR(100)
+);
+
+CREATE TABLE schedules (
+	query_id serial NOT NULL PRIMARY KEY,
+	email VARCHAR(100) NOT NULL,
+	connection_name VARCHAR(100),
+	query VARCHAR NOT NULL,
+	schema VARCHAR(100),
+	table_name VARCHAR(100),
+	anchor_time TIMESTAMP,
+	cadence VARCHAR(50)
+);

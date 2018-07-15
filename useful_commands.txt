@@ -1,0 +1,41 @@
+###### Postgresql Commands #####
+brew services start postgresql
+
+createdb 'dbname'
+
+psql 'dbname' # enters the db
+
+CREATE TABLE table_name (
+	column_1 datatype,
+	column_2 datatype,
+	column_3 datatype
+); # creates a table
+
+\d # lists tables in db
+
+INSERT INTO table_name (
+	column_1,
+	column_2,
+	column_3
+) VALUES (
+	value_1,
+	'value_2',
+	value_3
+); # inserts data into a table
+
+ALTER TABLE table_name ADD column_name datatype; # adds a column to a table
+
+UPDATE table_name SET column_name = val WHERE column_name = some_value; # updates the value in a column meeting a criteria
+
+CREATE TABLE login (
+	id serial NOT NULL PRIMARY KEY,
+	secret VARCHAR(100) NOT NULL,
+	name text UNIQUE NOT NULL
+);
+
+# serial: auto-incrementing integer value (user ids)
+# NOT NULL: doesn't allow the column to be null
+
+DELETE FROM table_name WHERE column_name = value_name;
+
+DROP TABLE table_name;

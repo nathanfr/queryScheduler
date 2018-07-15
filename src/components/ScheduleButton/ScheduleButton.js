@@ -12,16 +12,39 @@ const styles = theme => ({
   },
 });
 
-function ScheduleButton(props) {
-  const { classes } = props;
-  return (
-    <div className='white'>
-      <Button variant="contained" color="primary" className={classes.button}>
-        Schedule
-      </Button>
-    </div>
-  );
+class ScheduleButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ''
+    }
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return(
+      <div className='white tc'>
+        <Button variant="contained" color="primary" className={classes.button}
+        onClick={this.props.onSubmit}>
+          Schedule
+        </Button>
+      </div>      
+    )
+  }
 }
+
+// function ScheduleButton(props, { onSubmit }) {
+//   const { classes } = props;
+//   return (
+//     <div className='white tc'>
+//       <Button variant="contained" color="primary" className={classes.button}
+//       onClick={onSubmit}>
+//         Schedule
+//       </Button>
+//     </div>
+//   );
+// }
 
 ScheduleButton.propTypes = {
   classes: PropTypes.object.isRequired,

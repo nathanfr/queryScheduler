@@ -21,27 +21,59 @@ const inlineStyle = {
   color: 'white'
 };
 
-function DatePicker(props) {
-  const { classes } = props;
+class DatePicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ''
+    }
+  }
 
-  return (
-    <div className='white' style={inlineStyle}>
-      <form className={classes.container} noValidate style={inlineStyle}>
-        <TextField
-          id="datetime-local"
-          label="Anchor Date"
-          type="datetime-local"
-          style={inlineStyle}
-          defaultValue="2017-05-24T10:30"
-          className={classes.textField}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-      </form>
-    </div>
-  );
+  render() {
+    const { classes } = this.props;
+
+    return(
+      <div className='white' style={inlineStyle}>
+        <form className={classes.container} noValidate style={inlineStyle}>
+          <TextField
+            onChange={this.props.onChange}
+            id="datetime-local"
+            label="Anchor Date"
+            type="datetime-local"
+            style={inlineStyle}
+            defaultValue="2017-05-24T10:30"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </form>
+      </div>
+    )
+  }
 }
+
+// function DatePicker(props) {
+//   const { classes } = props;
+
+//   return (
+//     <div className='white' style={inlineStyle}>
+//       <form className={classes.container} noValidate style={inlineStyle}>
+//         <TextField
+//           id="datetime-local"
+//           label="Anchor Date"
+//           type="datetime-local"
+//           style={inlineStyle}
+//           defaultValue="2017-05-24T10:30"
+//           className={classes.textField}
+//           InputLabelProps={{
+//             shrink: true,
+//           }}
+//         />
+//       </form>
+//     </div>
+//   );
+// }
 
 DatePicker.propTypes = {
   classes: PropTypes.object.isRequired,

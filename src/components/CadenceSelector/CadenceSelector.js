@@ -25,13 +25,17 @@ const styles = theme => ({
 });
 
 class CadenceSelector extends React.Component {
-  state = {
-    age: '',
-    name: 'hai',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      cadence: ''
+    }
+  }
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    this.setState({cadence: event.target.value})
+    console.log(event.target.value)
+    console.log(this.props)
   };
 
   render() {
@@ -42,17 +46,16 @@ class CadenceSelector extends React.Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-helper" className='inputItem'>Cadence</InputLabel>
           <NativeSelect
-            value={this.state.age}
-            onChange={this.handleChange('age')}
+            onChange={this.props.onChange}
             input={<Input name="Cadence" id="age-native-helper" />}
           >
             <option value="" />
-            <option value={10}>Monthly</option>
-            <option value={20}>Weekly</option>
-            <option value={30}>Daily</option>
-            <option value={30}>Hourly</option>
+            <option value={'monthly'}>Monthly</option>
+            <option value={'weekly'}>Weekly</option>
+            <option value={'daily'}>Daily</option>
+            <option value={'hourly'}>Hourly</option>
           </NativeSelect>
-          <FormHelperText>Select the frequence with which you would like to run your query.</FormHelperText>
+          <FormHelperText>Select the frequency with which you would like to run your query.</FormHelperText>
         </FormControl>
       </div>
     );
