@@ -12,12 +12,9 @@ const styles = theme => ({
   },
 });
 
-class ScheduleButton extends React.Component {
+class AddButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: ''
-    }
   }
 
   render() {
@@ -27,15 +24,15 @@ class ScheduleButton extends React.Component {
       <div className='white tc'>
         <Button variant="contained" color="primary" className={classes.button}
         onClick={this.props.onSubmit}>
-          Schedule
+          Add Query
         </Button>
       </div>      
     )
   }
 }
 
-ScheduleButton.propTypes = {
+AddButton.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ScheduleButton);
+export default withStyles(styles)(AddButton);

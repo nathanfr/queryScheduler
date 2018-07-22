@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/navbar/navbar.js';
-//import QueryEditor from '../../components/query_editor/QueryEditor.js';
-//import SchemaText from '../../components/schema_field/SchemaText.js';
-//import DatePicker from '../../components/DatePicker/DatePicker.js';
-//import ScheduleButton from '../../components/ScheduleButton/ScheduleButton.js';
-//import CadenceSelector from '../../components/CadenceSelector/CadenceSelector.js';
 import LogInForm from '../../components/LogInForm/LogInForm.js';
 import RegisterForm from '../../components/RegisterForm/RegisterForm.js';
-import Form from '../form/Form';
+import Forms from '../forms/Forms';
 import './App.css';
 
 let route = 'home';
@@ -16,7 +11,12 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			input: '',
+      email: 'nathan.freney@gmail.com',
+      connection_name: 'test',
+      isLoggedIn: true,
+      email: '',
+      password: '',
+      forms: [1]
 		}
 	}
 
@@ -24,30 +24,113 @@ class App extends Component {
 		console.log(event.target.value);
 	}
 
+  onQueryChange = (event) => {
+    console.log(event.target.value)
+    this.setState({query: event.target.value})
+  }
+
+  onSchemaChange = (event) => {
+    console.log(event.target.value)
+    this.setState({schema: event.target.value})
+  }
+
+  onTableChange = (event) => {
+    console.log(event.target.value)
+    this.setState({table_name: event.target.value})
+  }
+
+  onCadenceSelect = (event) => {
+    console.log(event.target.value)
+    this.setState({cadence: event.target.value})
+  }
+
+  onDateChange = (event) => {
+    this.setState({anchor_time: event.target.value})
+  }
+
+  onSubmitQuery = () => {
+    alert(this.state.email)
+    fetch('http://localhost:3000/query', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.email,
+        connection_name: this.state.connection_name,
+        query: this.state.query,
+        schema: this.state.schema,
+        table_name: this.state.table_name,
+        anchor_time: this.state.anchor_time,
+        cadence: this.state.cadence
+      })
+    })
+  }
+
+  onFormAdd = () => {
+    const num = this.state.forms.length
+    this.setState((prevState) => {
+      return {
+        forms: prevState.forms.concat(num+1)
+      }
+    })
+  }
+
+  onSubmitSignIn = () => {
+    alert(this.state.email)
+    fetch('http://localhost:3000/login', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+      .then(response => response.json())
+      .then(response => alert(response))
+  }
+
 	onSubmit = () => {
-		console.log('Submitted');
+		alert('Submitted');
 	}
 
+  checkLogIn = () => {
+    if (this.state.isLoggedIn) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
-  	if (route === 'login') {
+  	if (!this.checkLogIn()) {
   		return (
   			<div>
       			<Navbar />
-      			<LogInForm />
+      			<LogInForm onSubmit={this.onSubmitSignIn} />
       		</div>
   		)
-  	} else if (route === 'register') {
-  		return (
-  			<div>
-  				<Navbar />
-  				<RegisterForm />
-  			</div>
-  		)
+  	// } else if (checkLogIn()) {
+  	// 	return (
+  	// 		<div>
+  	// 			<Navbar />
+  	// 			<RegisterForm />
+  	// 		</div>
+  	// 	)
   	} else {
   		return (
 	      <div>
 	      	<Navbar />
-	      	<Form onInputChange={this.onInputChange} onSubmit={this.onSubmit} />
+	      	<Forms
+            onQueryChange={this.onQueryChange}
+            forms={this.state.forms} onFormAdd={this.onFormAdd}
+            onInputChange={this.onInputChange}
+            onSubmit={this.onSubmit}
+            onSchemaChange={this.onSchemaChange}
+            onTableChange={this.onTableChange}
+            onCadenceSelect={this.onCadenceSelect}
+            onDateChange={this.onDateChange}
+            onSubmitQuery={this.onSubmitQuery}
+            email={this.state.email}
+          />
 	      </div>
 	    );
   	}

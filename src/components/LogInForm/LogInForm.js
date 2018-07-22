@@ -18,18 +18,6 @@ class LogInForm extends React.Component {
 		this.setState({password: event.target.value})
 	}
 
-	onSubmitSignIn = () => {
-		fetch('http://localhost:3000/login', {
-			method: 'post',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				email: this.state.email,
-				password: this.state.password
-			})
-		})
-			.then(response => response.json())
-	}
-
 	render() {
 		return (
 			<div>
@@ -59,7 +47,7 @@ class LogInForm extends React.Component {
 					    </fieldset>
 					    <div className="centeredButton">
 					      <input
-					      	onClick={this.onSubmitSignIn}
+					      	onClick={this.props.onSubmit}
 					      	className="b tc ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
 					      	type="submit"
 					      	value="Sign in"/>
